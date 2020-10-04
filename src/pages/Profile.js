@@ -11,6 +11,7 @@ import axios from "axios";
 import OrdersProfile from "./OrdersProfile";
 import formUpdate from "../components/formUpdate";
 
+
 export default function Profile(props) {
   const customerRegister = useSelector((state) => state.customerRegister);
   const { customerInfo } = customerRegister;
