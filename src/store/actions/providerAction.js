@@ -49,7 +49,7 @@ const update = ({
   });
   try {
     const { data } = await axios.put(
-      "http://localhost:8000/api/provider/" + id,
+      process.env.REACT_APP_SERVER_URL + "provider/" + id,
       {
         names,
         lastNames,
@@ -78,7 +78,7 @@ const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: PROVIDER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/provider/ingreso",
+      process.env.REACT_APP_SERVER_URL + "provider/ingreso",
       {
         email,
         password,
@@ -126,7 +126,7 @@ const register = (
   });
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/provider/registro",
+      process.env.REACT_APP_SERVER_URL + "provider/registro",
       {
         names,
         lastNames,

@@ -24,7 +24,7 @@ const listProducts = (category = "") => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await axios.get(
-      "http://localhost:8000/api/product?category=" + category
+      process.env.REACT_APP_SERVER_URL + "product?category=" + category
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -35,31 +35,12 @@ const listProducts = (category = "") => async (dispatch) => {
 const saveProduct = (product) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_SAVE_REQUEST, payload: product });
-    // const {
-    //   providerSignIn: { providerInfo },
-    // } = getState();
     if (!product._id) {
       const { data } = await axios.post(
-        "http://localhost:8000/api/product/crear",
-        product,
-        {
-          // headers: {
-          //   Authorization: "Bearer " + providerInfo.token,
-          // },
-        }
+        process.env.REACT_APP_SERVER_URL + "product/crear",
+        product
       );
       dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
-    } else {
-      // const { data } = await axios.put(
-      //   "/api/product/" + product._id,
-      //   product,
-      //   {
-      //     headers: {
-      //       Authorization: "Bearer " + providerInfo.token,
-      //     },
-      //   }
-      // );
-      // dispatch({ type: PRODUCT_SAVE_SUCCESS, payload: data });
     }
   } catch (error) {
     dispatch({ type: PRODUCT_SAVE_FAIL, payload: error.message });
@@ -70,7 +51,7 @@ const detailsProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
     const { data } = await axios.get(
-      "http://localhost:8000/api/product/" + productId
+      process.env.REACT_APP_SERVER_URL + "product/" + productId
     );
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -80,15 +61,10 @@ const detailsProduct = (productId) => async (dispatch) => {
 
 const deleteProduct = (productId) => async (dispatch, getState) => {
   try {
-    // const {
-    //   userSignIn: { userInfo },
-    // } = getState();
     dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
-    const { data } = await axios.delete("http://localhost:8000/api/product/" + productId, {
-      // headers: {
-      //   Authorization: "Bearer " + userInfo.token,
-      // },
-    });
+    const { data } = await axios.delete(
+      process.env.REACT_APP_SERVER_URL + "product/" + productId
+    );
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data, success: true });
   } catch (error) {
     dispatch({ type: PRODUCT_DELETE_FAIL, payload: error.message });
@@ -99,8 +75,8 @@ const saveProductReview = (productId, review) => async (dispatch, getState) => {
   try {
     dispatch({ type: PRODUCT_REVIEW_SAVE_REQUEST, payload: review });
     const { data } = await axios.post(
-      `http://localhost:8000/api/product/${productId}/reviews`,
-      review,
+      process.env.REACT_APP_SERVER_URL + `product/${productId}/reviews`,
+      review
     );
     dispatch({ type: PRODUCT_REVIEW_SAVE_SUCCESS, payload: data });
   } catch (error) {
