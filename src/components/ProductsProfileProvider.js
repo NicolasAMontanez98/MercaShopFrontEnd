@@ -6,7 +6,7 @@ import { updateProduct, deleteProduct } from "../store/actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { listProducts } from "../store/actions/productAction";
-import { Pagination } from '@material-ui/lab';
+import { Pagination } from "@material-ui/lab";
 
 export default function ProductsProfileProvider() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function ProductsProfileProvider() {
 
   useEffect(() => {
     dispatch(listProducts(category));
-  }, [category]);
+  }, [successDelete]);
 
   const formatCurrency = (number) => {
     let res = new Intl.NumberFormat("en-CO").format(number);
@@ -43,15 +43,17 @@ export default function ProductsProfileProvider() {
   const productsPerPage = 16;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
   const totalProducts = products.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  const handleChangePage = function(event, page) {
+  const handleChangePage = function (event, page) {
     setCurrentPage(page);
   };
 
-  
   function readFile(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -107,6 +109,23 @@ export default function ProductsProfileProvider() {
           }).then((result) => {
             if (result.isConfirmed) {
               Swal.fire("Cambios guardados!", "", "success");
+            }
+          });
+        };
+        const handleConfirmDelete = (e) => {
+          e.preventDefault();
+          Swal.fire({
+            title: "¿Quieres borrar este producto?",
+            showCancelButton: true,
+            icon: "info",
+            confirmButtonColor: "#28B463",
+            confirmButtonText: "Si",
+            denyButtonText: `No`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteHandler(product._id);
+              Swal.fire("Producto borrado!", "", "success");
+              window.location.reload(false);
             }
           });
         };
@@ -174,7 +193,6 @@ export default function ProductsProfileProvider() {
                               type="button"
                               className="btn btn-success btn-block"
                               data-toggle="collapse"
-                              type="button"
                               aria-expanded="false"
                               aria-controls={editCard}
                               data-target={editC}
@@ -187,17 +205,12 @@ export default function ProductsProfileProvider() {
                           <div className="col">
                             <button
                               type="button"
-                              onClick={() => deleteHandler(product._id)}
+                              onClick={handleConfirmDelete}
                               className="btn btn-danger btn-block"
                             >
                               <FontAwesomeIcon icon={faTrash} />
                             </button>
                           </div>
-                        </div>
-                        <div className="col-md-2">
-                          <p className="card-description font-weight-bold">
-                            Precio:   ${formatCurrency(product.price)}
-                          </p>
                         </div>
                       </div>
                     </div>
@@ -315,7 +328,7 @@ export default function ProductsProfileProvider() {
                       required
                     />
                   </div>
-                  <di className="form-group col-md-4">
+                  <div className="form-group col-md-4">
                     <label
                       htmlFor="inputProductPrice"
                       className="font-weight-bolder"
@@ -330,7 +343,7 @@ export default function ProductsProfileProvider() {
                       onChange={(e) => setPrice(e.target.value)}
                       required
                     />
-                  </di>
+                  </div>
                 </div>
                 <button type="submit" className="btn btn-warning ml-2 mb-2">
                   Actualizar
@@ -338,16 +351,16 @@ export default function ProductsProfileProvider() {
               </form>
             </div>
           </div>
-          );
-        })}
-      <div>
+        );
+      })}
+      <div className="d-flex justify-content-center">
         <Pagination
-            count={totalPages}
-            variant="outlined"
-            color="secondary"
-            page={currentPage}
-            onChange={handleChangePage}
-          />
+          count={totalPages}
+          variant="outlined"
+          color="secondary"
+          page={currentPage}
+          onChange={handleChangePage}
+        />
       </div>
     </div>
   );

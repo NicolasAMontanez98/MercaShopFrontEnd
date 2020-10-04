@@ -15,7 +15,7 @@ export default function OrdersProfile({ customerId, payed }) {
         })
         .catch((err) => console.log("error: ", err));
     }
-  }, [customerId]);
+  }, [customerId]); 
 
   const formatCurrency = (number) => {
     let res = new Intl.NumberFormat("en-CO").format(number);

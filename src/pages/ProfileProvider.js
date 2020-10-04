@@ -118,8 +118,7 @@ export default function ProfileProvider(props) {
       icon: "success",
       confirmButtonColor: "#28B463",
       confirmButtonText: "Genial!!!",
-    })
-    .then((result) => {
+    }).then((result) => {
       window.location.reload();
     });
   };
@@ -567,18 +566,28 @@ export default function ProfileProvider(props) {
                 >
                   Imagen
                 </label>
-                <input 
-                  type="file"
-                  className="form-control"
-                  name="file"
-                  id="inputProductImage"
-                  accept="image/*"
-                  onChange={handleImage}
-                  required
-                />
+                <div className="custom-file">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    name="file"
+                    id="inputProductImage"
+                    aria-describedby="inputProductImageA"
+                    accept="image/*"
+                    onChange={handleImage}
+                    required
+                  />
+                  <label
+                    className="custom-file-label"
+                    htmlFor="inputProductImage"
+                  >
+                    Escoja una imagen
+                  </label>
+                </div>
                 {image && (
                   <img
                     src={image}
+                    className="img-thumbnail mx-1 my-1"
                     alt="imagen a subir"
                     width="100"
                     height="100"
