@@ -45,7 +45,7 @@ function ShowProducts(props) {
       <div className="row d-flex justify-content-center mb-5">
         {product()}
       </div>
-      <div>
+      <div className="d-flex justify-content-center">
         <Pagination
           count={totalPages}
           variant="outlined"

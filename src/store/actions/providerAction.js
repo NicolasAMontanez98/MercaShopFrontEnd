@@ -12,7 +12,7 @@ import {
   PROVIDER_UPDATE_FAIL,
 } from "../constants/providerConstants";
 
-const update = ({
+const update = (
   id,
   names,
   lastNames,
@@ -25,8 +25,8 @@ const update = ({
   businessName,
   nit,
   commerceType,
-  webPage,
-}) => async (dispatch, getState) => {
+  webPage
+) => async (dispatch, getState) => {
   const {
     providerSignIn: { providerInfo },
   } = getState();
@@ -49,7 +49,7 @@ const update = ({
   });
   try {
     const { data } = await axios.put(
-      "http://localhost:8000/api/provider/" + id,
+      process.env.REACT_APP_SERVER_URL + "provider/actualizar/" + id,
       {
         names,
         lastNames,
@@ -63,11 +63,9 @@ const update = ({
         nit,
         commerceType,
         webPage,
-      },
-      {
-        headers: { Authorization: "Bearer " + providerInfo.token },
       }
     );
+    console.log(data);
     dispatch({ type: PROVIDER_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PROVIDER_UPDATE_FAIL, payload: error.message });
@@ -78,7 +76,7 @@ const signIn = (email, password) => async (dispatch) => {
   dispatch({ type: PROVIDER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/provider/ingreso",
+      process.env.REACT_APP_SERVER_URL + "provider/ingreso",
       {
         email,
         password,
@@ -126,7 +124,7 @@ const register = (
   });
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/provider/registro",
+      process.env.REACT_APP_SERVER_URL + "provider/registro",
       {
         names,
         lastNames,

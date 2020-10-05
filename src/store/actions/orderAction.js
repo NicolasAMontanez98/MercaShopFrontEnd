@@ -28,11 +28,15 @@ const createOrder = (order) => async (dispatch, getState) => {
     } = getState();
     const {
       data: { data: newOrder },
-    } = await axios.post("http://localhost:8000/api/order/create", order, {
-      headers: {
-        Authorization: "Bearer " + customerInfo.token,
-      },
-    });
+    } = await axios.post(
+      process.env.REACT_APP_SERVER_URL + "order/create",
+      order,
+      {
+        headers: {
+          Authorization: "Bearer " + customerInfo.token,
+        },
+      }
+    );
     localStorage.setItem("order", JSON.stringify(newOrder));
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: newOrder });
   } catch (error) {
@@ -46,9 +50,12 @@ const getOrders = () => async (dispatch, getState) => {
     const {
       customerSignIn: { customerInfo },
     } = getState();
-    const { data } = await axios.get("https://localhost:8000/api/order", {
-      headers: { Authorization: "Bearer " + customerInfo.token },
-    });
+    const { data } = await axios.get(
+      process.env.REACT_APP_SERVER_URL + "order",
+      {
+        headers: { Authorization: "Bearer " + customerInfo.token },
+      }
+    );
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ORDER_LIST_FAIL, payload: error.message });
@@ -61,7 +68,7 @@ const getMyOrders = () => async (dispatch, getState) => {
     const {
       customerSignIn: { customerInfo },
     } = getState();
-    const { data } = axios.get("https://localhost:8000/api/order", {
+    const { data } = axios.get(process.env.REACT_APP_SERVER_URL + "order", {
       headers: { Authorization: "Bearer " + customerInfo.token },
     });
     dispatch({ type: MY_ORDER_LIST_SUCCESS, payload: data });
@@ -77,7 +84,7 @@ const detailOrder = (orderId) => async (dispatch, getState) => {
       customerSignIn: { customerInfo },
     } = getState();
     const { data } = await axios.get(
-      process.env.REACT_APP_SERVER_URL+"order/" + orderId,
+      process.env.REACT_APP_SERVER_URL + "order/" + orderId,
       {
         headers: { Authorization: "Bearer " + customerInfo.token },
       }
@@ -94,8 +101,10 @@ const payOrder = (paymentResult) => async (dispatch, getState) => {
     const {
       customerSignIn: { customerInfo },
     } = getState();
-    const { data: { data: newOrder } } = await axios.post(
-      process.env.REACT_APP_SERVER_URL+"invoice/create",
+    const {
+      data: { data: newOrder },
+    } = await axios.post(
+      process.env.REACT_APP_SERVER_URL + "invoice/create",
       paymentResult,
       {
         headers: { Authorization: "Bearer " + customerInfo.token },
@@ -114,7 +123,7 @@ const deleteOrder = (orderId) => async (dispatch, getState) => {
       customerSignIn: { customerInfo },
     } = getState();
     const { data } = await axios.delete(
-      "http://localhost:8000/api/order/" + orderId,
+      process.env.REACT_APP_SERVER_URL + "order/" + orderId,
       {
         headers: { Authorization: "Bearer " + customerInfo.token },
       }

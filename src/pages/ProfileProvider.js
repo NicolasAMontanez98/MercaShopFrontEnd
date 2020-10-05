@@ -46,7 +46,9 @@ export default function ProfileProvider(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/provider/" + props.match.params.id)
+      .get(
+        process.env.REACT_APP_SERVER_URL + "provider/" + props.match.params.id
+      )
       .then(({ data }) => {
         setId(data._id);
         setNames(data.names);
@@ -63,27 +65,40 @@ export default function ProfileProvider(props) {
         setWebPage(data.webPage);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(
-      update(
-        id,
-        names,
-        lastNames,
-        idType,
-        idNumber,
-        email,
-        phone,
-        birthDate,
-        adress,
-        businessName,
-        nit,
-        commerceType,
-        webPage
-      )
-    );
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showCancelButton: true,
+      icon: "info",
+      confirmButtonColor: "#28B463",
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Cambios guardados!", "", "success");
+        window.location.reload(false);
+        dispatch(
+          update(
+            id,
+            names,
+            lastNames,
+            idType,
+            idNumber,
+            email,
+            phone,
+            birthDate,
+            adress,
+            businessName,
+            nit,
+            commerceType,
+            webPage
+          )
+        );
+      }
+    });
   };
 
   const handleSaveProduct = async (e) => {
@@ -189,7 +204,7 @@ export default function ProfileProvider(props) {
           data-parent="#accordionUpdate"
         >
           <div className="card-body border-bottom">
-            <form onClick={handleUpdate}>
+            <form onSubmit={handleUpdate}>
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label htmlFor="inputName" className="font-weight-bolder">

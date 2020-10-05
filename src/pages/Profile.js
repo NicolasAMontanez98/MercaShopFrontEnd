@@ -11,6 +11,7 @@ import axios from "axios";
 import OrdersProfile from "./OrdersProfile";
 import formUpdate from "../components/formUpdate";
 
+
 export default function Profile(props) {
   const customerRegister = useSelector((state) => state.customerRegister);
   const { customerInfo } = customerRegister;
@@ -34,7 +35,7 @@ export default function Profile(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/customer/" + props.match.params.id)
+      .get(process.env.REACT_APP_SERVER_URL + "order/customer/" + props.match.params.id)
       .then(({ data }) => {
         setNames(data.names);
         setLastNames(data.lastNames);
