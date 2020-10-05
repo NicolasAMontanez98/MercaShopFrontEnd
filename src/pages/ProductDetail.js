@@ -174,9 +174,11 @@ function ProductDetail(props) {
                         </button>
                       </form>
                     ) : (
-                      <div>
-                        Por favor <Link to="/login">inicie sesión</Link> para
-                        enviar una calificación.
+                      <div className="card">
+                        <h5 className="card-title mx-2 my-2">
+                          Por favor <Link to="/login" className="stretched-link">inicia sesión</Link> para
+                          enviar una calificación.
+                        </h5>
                       </div>
                     )}
                   </div>
