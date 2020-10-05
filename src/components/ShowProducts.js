@@ -42,7 +42,7 @@ function ShowProducts(props) {
   return loading ? (
     <div className="d-flex justify-content-center">
       <span style={{ color: "Tomate" }}>
-        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        <i className="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
       </span>
     </div>
   ) : error ? (
