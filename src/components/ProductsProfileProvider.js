@@ -72,8 +72,8 @@ export default function ProductsProfileProvider() {
     setProductId(product._id);
     const { data } = await axios({
       method: "POST",
-      baseURL: "http://localhost:8000",
-      url: "/api/image",
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: "image",
       data: dataImage,
       headers: {
         "Content-Type": "multipart/form-data",
