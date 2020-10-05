@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { update } from "../store/actions/customerAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,15 +9,11 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OrdersProfile from "./OrdersProfile";
-import formUpdate from "../components/formUpdate";
-
+import Swal from "sweetalert2";
 
 export default function Profile(props) {
-  const customerRegister = useSelector((state) => state.customerRegister);
-  const { customerInfo } = customerRegister;
   const dispatch = useDispatch();
 
-  const [role, setRole] = useState("");
   const [id, setId] = useState("");
   const [names, setNames] = useState("");
   const [lastNames, setLastNames] = useState("");
@@ -30,12 +26,14 @@ export default function Profile(props) {
   const [isVerified, setIsVerified] = useState(false);
 
   const [userName, setUserName] = useState("");
-  const [orders, setOrders] = useState([]);
-  const [customer, setCustomer] = useState({});
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/customer/" + props.match.params.id)
+      .get(
+        process.env.REACT_APP_SERVER_URL +
+          "customer/" +
+          props.match.params.id
+      )
       .then(({ data }) => {
         setNames(data.names);
         setLastNames(data.lastNames);
@@ -47,32 +45,44 @@ export default function Profile(props) {
         setAdress(data.adress);
         setUserName(data.userName);
         setId(data._id);
-        setRole(data.role);
         setIsVerified(data.isVerified);
       })
-      .catch((err) => console.log('profile customer', err));
+      .catch((err) => console.log("profile customer", err));
   }, []);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(
-      update(
-        names,
-        lastNames,
-        idType,
-        idNumber,
-        email,
-        phone,
-        birthDate,
-        adress,
-        userName
-      )
-    );
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showCancelButton: true,
+      icon: "info",
+      confirmButtonColor: "#28B463",
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(
+          update(
+            id,
+            names,
+            lastNames,
+            idType,
+            idNumber,
+            email,
+            phone,
+            birthDate,
+            adress,
+            userName
+          )
+        );
+        window.location.reload(false);
+      }
+    });
   };
 
   return (
     <div className="container">
-      { !isVerified && (
+      {!isVerified && (
         <div className="alert alert-danger mt-2" role="alert">
           Por favor revisa tu correo electrónico y confirma tu correo.
         </div>
@@ -128,7 +138,7 @@ export default function Profile(props) {
           data-parent="#accordionUpdate"
         >
           <div className="card-body border-bottom">
-            <form onClick={handleUpdate}>
+            <form onSubmit={handleUpdate}>
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label htmlFor="inputName" className="font-weight-bolder">
@@ -151,6 +161,7 @@ export default function Profile(props) {
                     className="form-control"
                     id="inputLastName"
                     placeholder={lastNames}
+                    onChange={(e) => setLastNames(e.target.value)}
                   />
                 </div>
               </div>
@@ -163,6 +174,7 @@ export default function Profile(props) {
                     id="inputIdType"
                     className="form-control"
                     defaultValue={idType}
+                    onChange={(e) => setIdType(e.target.value)}
                   >
                     <option value="predeterminado" disabled>
                       Seleccione una opción
@@ -186,6 +198,7 @@ export default function Profile(props) {
                     className="form-control"
                     id="inputIdNumber"
                     placeholder={idNumber}
+                    onChange={(e) => setIdNumber(e.target.value)}
                   />
                 </div>
               </div>
@@ -198,6 +211,7 @@ export default function Profile(props) {
                   className="form-control"
                   id="inputEmail"
                   placeholder={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="form-row">
@@ -210,6 +224,7 @@ export default function Profile(props) {
                     className="form-control"
                     id="inputPhone"
                     placeholder={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-md-4">
@@ -224,6 +239,7 @@ export default function Profile(props) {
                     className="form-control"
                     id="inputBirthDate"
                     placeholder={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
                   />
                 </div>
                 <div className="form-group col-md-4">
@@ -235,6 +251,7 @@ export default function Profile(props) {
                     className="form-control"
                     id="inputAdress"
                     placeholder={adress}
+                    onChange={(e) => setAdress(e.target.value)}
                   />
                 </div>
               </div>
@@ -247,6 +264,7 @@ export default function Profile(props) {
                   className="form-control"
                   id="inputUserName"
                   placeholder={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </div>
               <button type="submit" className="btn btn-info">

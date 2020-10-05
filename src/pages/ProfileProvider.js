@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { update } from "../store/actions/providerAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -30,23 +30,22 @@ export default function ProfileProvider(props) {
   const [nit, setNit] = useState(0);
   const [commerceType, setCommerceType] = useState("");
   const [webPage, setWebPage] = useState("");
-  const [provider, setProvider] = useState({});
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
-  const [productImage, setProductImage] = useState("");
   const [productQuantity, setProductQuantity] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
   const [productDiscount, setProductDiscount] = useState(0);
-  const [productIdProvider, setproductIdProvider] = useState(id);
 
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/provider/" + props.match.params.id)
+      .get(
+        process.env.REACT_APP_SERVER_URL + "provider/" + props.match.params.id
+      )
       .then(({ data }) => {
         setId(data._id);
         setNames(data.names);
@@ -63,27 +62,39 @@ export default function ProfileProvider(props) {
         setWebPage(data.webPage);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(
-      update(
-        id,
-        names,
-        lastNames,
-        idType,
-        idNumber,
-        email,
-        phone,
-        birthDate,
-        adress,
-        businessName,
-        nit,
-        commerceType,
-        webPage
-      )
-    );
+    Swal.fire({
+      title: "¿Quieres guardar los cambios?",
+      showCancelButton: true,
+      icon: "info",
+      confirmButtonColor: "#28B463",
+      confirmButtonText: "Si",
+      denyButtonText: `No`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(
+          update(
+            id,
+            names,
+            lastNames,
+            idType,
+            idNumber,
+            email,
+            phone,
+            birthDate,
+            adress,
+            businessName,
+            nit,
+            commerceType,
+            webPage
+          )
+        );
+        window.location.reload(false);
+      }
+    });
   };
 
   const handleSaveProduct = async (e) => {
@@ -189,7 +200,7 @@ export default function ProfileProvider(props) {
           data-parent="#accordionUpdate"
         >
           <div className="card-body border-bottom">
-            <form onClick={handleUpdate}>
+            <form onSubmit={handleUpdate}>
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label htmlFor="inputName" className="font-weight-bolder">

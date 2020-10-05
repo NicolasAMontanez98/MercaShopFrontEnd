@@ -15,8 +15,8 @@ import {
   CUSTOMER_VERIFIED_FAIL,
 } from "../constants/customerConstants";
 
-const update = ({
-  userId,
+const update = (
+  id,
   names,
   lastNames,
   idType,
@@ -25,15 +25,12 @@ const update = ({
   phone,
   birthDate,
   adress,
-  userName,
-}) => async (dispatch, getState) => {
-  const {
-    customerSignIn: { customerInfo },
-  } = getState();
+  userName
+) => async (dispatch, getState) => {
   dispatch({
     type: CUSTOMER_UPDATE_REQUEST,
     payload: {
-      userId,
+      id,
       names,
       lastNames,
       idType,
@@ -47,7 +44,7 @@ const update = ({
   });
   try {
     const { data } = await axios.put(
-      "process.env.REACT_APP_SERVER_URL+customer/" + userId,
+      process.env.REACT_APP_SERVER_URL + "customer/actualizar/" + id,
       {
         names,
         lastNames,
@@ -58,9 +55,6 @@ const update = ({
         birthDate,
         adress,
         userName,
-      },
-      {
-        headers: { Authorization: "Bearer " + customerInfo.token },
       }
     );
     dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: data });

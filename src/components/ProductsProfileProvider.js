@@ -11,7 +11,7 @@ import { Pagination } from "@material-ui/lab";
 export default function ProductsProfileProvider() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { products, loading, error } = productList;
+  const { products } = productList;
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [productImage, setProductImage] = useState("");
@@ -21,7 +21,6 @@ export default function ProductsProfileProvider() {
   const [price, setPrice] = useState(0);
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
-  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const productDelete = useSelector((state) => state.productDelete);
   const { success: successDelete } = productDelete;
@@ -29,7 +28,7 @@ export default function ProductsProfileProvider() {
 
   useEffect(() => {
     dispatch(listProducts(category));
-  }, [successDelete]);
+  }, []);
 
   const formatCurrency = (number) => {
     let res = new Intl.NumberFormat("en-CO").format(number);

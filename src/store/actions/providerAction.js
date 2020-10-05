@@ -12,7 +12,7 @@ import {
   PROVIDER_UPDATE_FAIL,
 } from "../constants/providerConstants";
 
-const update = ({
+const update = (
   id,
   names,
   lastNames,
@@ -25,11 +25,8 @@ const update = ({
   businessName,
   nit,
   commerceType,
-  webPage,
-}) => async (dispatch, getState) => {
-  const {
-    providerSignIn: { providerInfo },
-  } = getState();
+  webPage
+) => async (dispatch, getState) => {
   dispatch({
     type: PROVIDER_UPDATE_REQUEST,
     payload: {
@@ -49,7 +46,7 @@ const update = ({
   });
   try {
     const { data } = await axios.put(
-      process.env.REACT_APP_SERVER_URL + "provider/" + id,
+      process.env.REACT_APP_SERVER_URL + "provider/actualizar/" + id,
       {
         names,
         lastNames,
@@ -63,9 +60,6 @@ const update = ({
         nit,
         commerceType,
         webPage,
-      },
-      {
-        headers: { Authorization: "Bearer " + providerInfo.token },
       }
     );
     dispatch({ type: PROVIDER_UPDATE_SUCCESS, payload: data });

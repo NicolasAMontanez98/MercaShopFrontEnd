@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { saveShipping, savePayment } from "../store/actions/cartAction";
 import { createOrder } from "../store/actions/orderAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,12 +13,10 @@ export default function PlaceOrder(props) {
   const customerSignIn = useSelector((state) => state.customerSignIn);
   const { customerInfo } = customerSignIn;
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shipping } = cart;
-  const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, error, order } = orderCreate;
+  const { cartItems } = cart;
   const [city, setCity] = useState("");
   const [adress, setAdress] = useState("");
-  const [country, setCountry] = useState("Colombia");
+  const country = "Colombia";
   const [payment, setPayment] = useState("");
   const [progress, setProgress] = useState(0);
   const [customerData, setCustomerData] = useState({});
@@ -42,6 +40,8 @@ export default function PlaceOrder(props) {
         return "CE";
       case "Pasaporte":
         return "CPPN";
+      default: 
+        return "CC";
     }
   };
 

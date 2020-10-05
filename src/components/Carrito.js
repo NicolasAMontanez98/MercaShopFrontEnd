@@ -32,10 +32,6 @@ export default function Carrito(props) {
 
   const numProducts = cart.cartItems.length;
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };

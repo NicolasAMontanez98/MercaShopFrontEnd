@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Pagination } from '@material-ui/lab';
+import { Pagination } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../store/actions/productAction";
 import ProductsCard from "./ProductsCard";
@@ -19,11 +19,14 @@ function ShowProducts(props) {
   const productsPerPage = 16;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
   const totalProducts = products.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  const handleChangePage = function(event, page) {
+  const handleChangePage = function (event, page) {
     setCurrentPage(page);
   };
 
@@ -37,14 +40,16 @@ function ShowProducts(props) {
     );
   };
   return loading ? (
-    <div>Cargando...</div>
+    <div className="d-flex justify-content-center">
+      <span style={{ color: "Tomate" }}>
+        <i className="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+      </span>
+    </div>
   ) : error ? (
     <div>{error}</div>
   ) : (
     <div className="container">
-      <div className="row d-flex justify-content-center mb-5">
-        {product()}
-      </div>
+      <div className="row d-flex justify-content-center mb-5">{product()}</div>
       <div className="d-flex justify-content-center">
         <Pagination
           count={totalPages}
