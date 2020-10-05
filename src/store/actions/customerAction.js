@@ -27,9 +27,6 @@ const update = (
   adress,
   userName
 ) => async (dispatch, getState) => {
-  const {
-    customerSignIn: { customerInfo },
-  } = getState();
   dispatch({
     type: CUSTOMER_UPDATE_REQUEST,
     payload: {

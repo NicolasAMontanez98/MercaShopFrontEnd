@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { update } from "../store/actions/providerAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -30,16 +30,13 @@ export default function ProfileProvider(props) {
   const [nit, setNit] = useState(0);
   const [commerceType, setCommerceType] = useState("");
   const [webPage, setWebPage] = useState("");
-  const [provider, setProvider] = useState({});
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
-  const [productImage, setProductImage] = useState("");
   const [productQuantity, setProductQuantity] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
   const [productDiscount, setProductDiscount] = useState(0);
-  const [productIdProvider, setproductIdProvider] = useState(id);
 
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);

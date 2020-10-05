@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { verify } from "../store/actions/customerAction";
 import logo from "./../assets/images/Merca Shop letters.png";
 import { Animated } from "react-animated-css";
 
 export default function ActivarCuenta(props) {
-  const [isVerified, setVerificado] = useState(true);
+  const isVerified = true;
   const dispatch = useDispatch();
 
   const handleVerify = (e) => {

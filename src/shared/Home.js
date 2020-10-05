@@ -1,12 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Switch from "react-bootstrap/esm/Switch";
 
 import Main from "./../pages/Main";
 import SideMenu from "./SideMenu";
 import Footer from "./Footer";
-import Header from "./Header";
 import ProductDetail from "../pages/ProductDetail";
 
 function Home(props) {

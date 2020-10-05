@@ -40,7 +40,7 @@ const createOrder = (order) => async (dispatch, getState) => {
     localStorage.setItem("order", JSON.stringify(newOrder));
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: newOrder });
   } catch (error) {
-    dispatch({ type: ORDER_CREATE_REQUEST, payload: error.message });
+    dispatch({ type: ORDER_CREATE_FAIL, payload: error.message });
   }
 };
 
@@ -89,7 +89,7 @@ const detailOrder = (orderId) => async (dispatch, getState) => {
         headers: { Authorization: "Bearer " + customerInfo.token },
       }
     );
-    dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ORDER_DETAILS_FAIL, payload: error.message });
   }
@@ -128,7 +128,7 @@ const deleteOrder = (orderId) => async (dispatch, getState) => {
         headers: { Authorization: "Bearer " + customerInfo.token },
       }
     );
-    dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+    dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: ORDER_DELETE_FAIL, payload: error.message });
   }

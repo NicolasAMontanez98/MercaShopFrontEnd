@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { update } from "../store/actions/customerAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,15 +9,11 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import OrdersProfile from "./OrdersProfile";
-import formUpdate from "../components/formUpdate";
 import Swal from "sweetalert2";
 
 export default function Profile(props) {
-  const customerRegister = useSelector((state) => state.customerRegister);
-  const { customerInfo } = customerRegister;
   const dispatch = useDispatch();
 
-  const [role, setRole] = useState("");
   const [id, setId] = useState("");
   const [names, setNames] = useState("");
   const [lastNames, setLastNames] = useState("");
@@ -30,8 +26,6 @@ export default function Profile(props) {
   const [isVerified, setIsVerified] = useState(false);
 
   const [userName, setUserName] = useState("");
-  const [orders, setOrders] = useState([]);
-  const [customer, setCustomer] = useState({});
 
   useEffect(() => {
     axios
@@ -51,7 +45,6 @@ export default function Profile(props) {
         setAdress(data.adress);
         setUserName(data.userName);
         setId(data._id);
-        setRole(data.role);
         setIsVerified(data.isVerified);
       })
       .catch((err) => console.log("profile customer", err));
