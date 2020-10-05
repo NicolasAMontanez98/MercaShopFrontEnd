@@ -47,7 +47,7 @@ const update = ({
   });
   try {
     const { data } = await axios.put(
-      "process.env.REACT_APP_SERVER_URL+customer/" + userId,
+      process.env.REACT_APP_SERVER_URL + "customer/" + userId,
       {
         names,
         lastNames,
