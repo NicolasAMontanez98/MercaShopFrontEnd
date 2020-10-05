@@ -92,7 +92,6 @@ export default function ProfileProvider(props) {
             webPage
           )
         );
-        window.location.reload(false);
       }
     });
   };

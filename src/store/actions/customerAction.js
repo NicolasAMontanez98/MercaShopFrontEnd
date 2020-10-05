@@ -57,8 +57,12 @@ const update = (
         userName,
       }
     );
+    console.log("update", data);
     dispatch({ type: CUSTOMER_UPDATE_SUCCESS, payload: data });
+    localStorage.removeItem("customerInfo");
+    localStorage.setItem("customerInfo", JSON.stringify(data));
   } catch (error) {
+    console.log(error);
     dispatch({ type: CUSTOMER_UPDATE_FAIL, payload: error.message });
   }
 };

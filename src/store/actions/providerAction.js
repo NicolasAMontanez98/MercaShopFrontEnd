@@ -63,6 +63,8 @@ const update = (
       }
     );
     dispatch({ type: PROVIDER_UPDATE_SUCCESS, payload: data });
+    localStorage.removeItem("providerInfo");
+    localStorage.setItem("providerInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({ type: PROVIDER_UPDATE_FAIL, payload: error.message });
   }
