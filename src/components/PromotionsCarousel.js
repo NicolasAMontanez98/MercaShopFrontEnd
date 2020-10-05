@@ -1,8 +1,5 @@
 import React from "react";
 import bannerLacteos from "./../assets/banners/bannerLacteos.png";
-import bannerLicores from "./../assets/banners/bannerLicores.png";
-import bannerMascotas from "./../assets/banners/bannerMascotas.png";
-import bannerPanaderia from "./../assets/banners/bannerPanaderia.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons";
@@ -27,16 +24,32 @@ function PromotionCarousel() {
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src={bannerLacteos} className="d-block w-100" alt="..." />
+            <img
+              src={bannerLacteos}
+              className="d-block w-100"
+              alt="Lacteos y huevos promoción"
+            />
           </div>
           <div className="carousel-item">
-            <img src={bannerLicores} className="d-block w-100" alt="..." />
+            <img
+              src="https://res.cloudinary.com/dkrcosw87/image/upload/v1601853566/banners/bannerLicores_hzk3q2.png"
+              className="d-block w-100"
+              alt="Licores promoción"
+            />
           </div>
           <div className="carousel-item">
-            <img src={bannerMascotas} className="d-block w-100" alt="..." />
+            <img
+              src="https://res.cloudinary.com/dkrcosw87/image/upload/v1601853531/banners/bannerMascotas_t6rpap.png"
+              className="d-block w-100"
+              alt="Mascotas promoción"
+            />
           </div>
           <div className="carousel-item">
-            <img src={bannerPanaderia} className="d-block w-100" alt="..." />
+            <img
+              src="https://res.cloudinary.com/dkrcosw87/image/upload/v1601853571/banners/bannerPanaderia_npd8yw.png"
+              className="d-block w-100"
+              alt="Panadería promoción"
+            />
           </div>
         </div>
         <a
@@ -45,7 +58,11 @@ function PromotionCarousel() {
           role="button"
           data-slide="prev"
         >
-          <FontAwesomeIcon icon={faArrowCircleLeft} className="fa-3x" aria-hidden="true"/>
+          <FontAwesomeIcon
+            icon={faArrowCircleLeft}
+            className="fa-3x"
+            aria-hidden="true"
+          />
           <span className="sr-only">Previous</span>
         </a>
         <a
@@ -54,7 +71,11 @@ function PromotionCarousel() {
           role="button"
           data-slide="next"
         >
-          <FontAwesomeIcon icon={faArrowCircleRight} className="fa-3x" aria-hidden="true"/>
+          <FontAwesomeIcon
+            icon={faArrowCircleRight}
+            className="fa-3x"
+            aria-hidden="true"
+          />
           <span className="sr-only bg-dark">Next</span>
         </a>
       </div>
