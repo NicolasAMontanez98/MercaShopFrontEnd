@@ -18,7 +18,7 @@ const ProductsCard = ({ product }) => {
     return res;
   };
 
-  const { image, name, index, discount, quantity, price, _id, rating, numReviews } = product;
+  const { image, name, index, discount, quantity, price, _id, rating } = product;
   return (
     <div className="container col-3">
       <div className="card mt-4 mr-2 p-3" style={{height: 410}} key={index}>

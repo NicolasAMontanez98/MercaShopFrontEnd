@@ -27,9 +27,6 @@ const update = (
   commerceType,
   webPage
 ) => async (dispatch, getState) => {
-  const {
-    providerSignIn: { providerInfo },
-  } = getState();
   dispatch({
     type: PROVIDER_UPDATE_REQUEST,
     payload: {

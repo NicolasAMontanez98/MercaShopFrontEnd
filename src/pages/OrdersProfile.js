@@ -17,11 +17,6 @@ export default function OrdersProfile({ customerId, payed }) {
     }
   }, [customerId]); 
 
-  const formatCurrency = (number) => {
-    let res = new Intl.NumberFormat("en-CO").format(number);
-    return res;
-  };
-
   return (
     <div>
       {orders.map((order) => {

@@ -1,17 +1,14 @@
 import React, { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { TextField, InputBase, IconButton } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { listProducts } from "../store/actions/productAction";
-import { SearchIcon } from "@primer/octicons-react";
 import { Link } from "react-router-dom";
 
 export default function SearchBox() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  const { products, loading, error } = productList;
+  const { products } = productList;
   const [search, setSearch] = useState("");
   let category = "";
 
@@ -85,23 +82,3 @@ export default function SearchBox() {
     </div>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "2px 4px",
-    display: "flex",
-    alignItems: "center",
-    width: 400,
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-}));

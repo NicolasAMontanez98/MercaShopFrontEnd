@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Payed from "../components/Payed";
-import NotPayed from "../components/NotPayed";
 
 export default function OrdersProfileProvider() {
   const [orders, setOrders] = useState([]);
@@ -14,11 +13,6 @@ export default function OrdersProfileProvider() {
         })
         .catch((err) => console.log("error: ", err));
   }, []);
-
-  const formatCurrency = (number) => {
-    let res = new Intl.NumberFormat("en-CO").format(number);
-    return res;
-  };
 
   return (
     <div>

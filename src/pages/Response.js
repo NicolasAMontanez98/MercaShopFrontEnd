@@ -3,19 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import queryString from "query-string";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowCircleLeft,
-  faCaretSquareDown,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import { payOrder } from "../store/actions/orderAction";
 
 export default function Response({ location }) {
   const [info, setInfo] = useState({});
   const order = JSON.parse(localStorage.getItem("order")) || null;
   const customerSignIn = useSelector((state) => state.customerSignIn);
-  const { loading, customerInfo, error } = customerSignIn;
+  const { customerInfo } = customerSignIn;
   const providerSignIn = useSelector((state) => state.providerSignIn);
   const { providerInfo } = providerSignIn;
   const dispatch = useDispatch();
@@ -47,7 +41,7 @@ export default function Response({ location }) {
         status: info.x_transaction_state,
       })
     );
-    history.push('/');
+    history.push("/");
   };
 
   useEffect(() => {

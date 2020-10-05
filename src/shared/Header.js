@@ -3,21 +3,18 @@ import { useSelector, useDispatch } from "react-redux"; // No ha sido utilizado/
 import logo from "./../assets/images/Merca Shop letters inline.png";
 import logoWhite from "../assets/images/Merca Shop letters inline white.png";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { SearchIcon } from "@primer/octicons-react";
 import Carrito from "../components/Carrito";
 import { Pedidos, Location } from "../shared/Buttons";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { makeStyles } from "@material-ui/core/styles";
-import { Menu, MenuItem, TextField } from "@material-ui/core";
+import { Menu, MenuItem } from "@material-ui/core";
 import { logout as logoutCustomer } from "../store/actions/customerAction";
 import { logout as logoutProvider } from "../store/actions/providerAction";
 import { AccountCircle, AccountBox } from "@material-ui/icons";
-import { listProducts } from "../store/actions/productAction";
-import SearchBox from '../components/SearchBox';
+import SearchBox from "../components/SearchBox";
 
 export default function Header(props) {
-  const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const customerSignIn = useSelector((state) => state.customerSignIn);
   const { customerInfo } = customerSignIn;
@@ -27,7 +24,6 @@ export default function Header(props) {
   const [path, setPath] = useState(window.location.pathname);
   let location = useLocation();
   let history = useHistory();
-  let category = "";
 
   useEffect(() => {
     setPath(location.pathname);
@@ -51,9 +47,7 @@ export default function Header(props) {
   const handleLogOut = (e) => {
     e.preventDefault();
     history.push("/");
-    {
-      customerInfo ? dispatch(logoutCustomer()) : dispatch(logoutProvider());
-    }
+    customerInfo ? dispatch(logoutCustomer()) : dispatch(logoutProvider());
   };
 
   const currentPath = (path) => {
@@ -66,11 +60,6 @@ export default function Header(props) {
       return true;
     }
     return false;
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(listProducts(category, search));
   };
 
   const classes = useStyles();
@@ -111,7 +100,7 @@ export default function Header(props) {
           </Link>
           <div className="row container">
             <div className="col-md-6">
-              <SearchBox/>
+              <SearchBox />
             </div>
             <div className="col-md-6">
               <div
