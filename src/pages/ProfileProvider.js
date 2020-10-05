@@ -78,8 +78,6 @@ export default function ProfileProvider(props) {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Cambios guardados!", "", "success");
-        window.location.reload(false);
         dispatch(
           update(
             id,
@@ -97,6 +95,7 @@ export default function ProfileProvider(props) {
             webPage
           )
         );
+        window.location.reload(false);
       }
     });
   };

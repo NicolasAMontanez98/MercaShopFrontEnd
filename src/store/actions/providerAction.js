@@ -65,7 +65,6 @@ const update = (
         webPage,
       }
     );
-    console.log(data);
     dispatch({ type: PROVIDER_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PROVIDER_UPDATE_FAIL, payload: error.message });
