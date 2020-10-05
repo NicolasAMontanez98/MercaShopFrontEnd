@@ -61,7 +61,7 @@ export default function PlaceOrder(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/customer/" + customerInfo._id)
+      .get(process.env.REACT_APP_SERVER_URL + "customer/" + customerInfo._id)
       .then(({ data }) => {
         setCustomerData(data);
       });
