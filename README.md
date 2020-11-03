@@ -30,3 +30,18 @@ podras acceder a productos de aseo, mercado, frutas, verduras, entre otros. En m
 * Creación de promociones, eventos y descuentos, con esta opción podrá crear distintas formas de aumentar sus ventas, con descuentos en sus productos, promociones de distintos productos o eventos para fomentar la compra de más productos.
 
 * Distintos sistemas de pago para dar flexibilidad a tu negocio.
+
+## Tecnologías usadas:
+### Frontend :
+* React y Redux para el manejo de estados
+* React-Bootstrap y Material UI para estilos
+* SweetAlert2 para las alertas
+* Transacciones virtuales con epayco
+* Vercel para el despliegue
+### Backend:
+* Servidor node con express
+* Base de datos remota con mongoDB atlas
+* Encriptación de información sensible con bcrypt
+* Autenticación con JWT
+* Manejo de imagenes con cloudinary
+* Despliegue en heroku
