@@ -5,6 +5,8 @@
 En *MercaShop* podras comprar en las tiendas más cercanas sin salir de tu casa, con MercaShop
 podras acceder a productos de aseo, mercado, frutas, verduras, entre otros. En medio de esta pandemia *MercaShop*  te permite acceder a los productos que desees sin salir de tu casa y en tus tiendas de confianza.
 
+![Alt text](https://res.cloudinary.com/dkrcosw87/image/upload/v1604441778/MercaShop_ghtxnf.png)
+
 ## Funcionalidades
 
 ### Cliente
